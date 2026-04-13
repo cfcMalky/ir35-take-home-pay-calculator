@@ -1,160 +1,298 @@
-"use client";
-import { useState } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Limited vs Umbrella UK Calculator (2026)</title>
 
-export default function LimitedVsUmbrella() {
-  const [dayRate, setDayRate] = useState(400);
-  const [daysPerWeek, setDaysPerWeek] = useState(5);
-  const [weeksPerYear, setWeeksPerYear] = useState(46);
-  const [ir35, setIr35] = useState("outside");
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Compare limited company vs umbrella company take-home pay in the UK and Scotland. Find out which is better for you.">
 
-  const annualRevenue = dayRate * daysPerWeek * weeksPerYear;
+<script src="https://cdn.tailwindcss.com"></script>
 
-  // Simple estimation logic (adjust later if needed)
-  const umbrellaTakeHome = annualRevenue * 0.65;
-  const limitedTakeHome =
-    ir35 === "outside" ? annualRevenue * 0.75 : annualRevenue * 0.65;
-
-  const recommendation =
-    limitedTakeHome > umbrellaTakeHome
-      ? "Limited Company"
-      : "Umbrella Company";
-
-  return (
-    <main className="max-w-4xl mx-auto p-6">
-      {/* HERO */}
-      <h1 className="text-3xl font-bold mb-4">
-        Limited Company vs Umbrella (UK)
-      </h1>
-      <p className="mb-6 text-gray-600">
-        Compare your take-home pay and see which option suits your situation.
-      </p>
-
-      {/* CALCULATOR */}
-      <div className="bg-white shadow rounded-2xl p-6 mb-8">
-        <h2 className="text-xl font-semibold mb-4">Calculator</h2>
-
-        <div className="grid grid-cols-2 gap-4">
-          <input
-            type="number"
-            value={dayRate}
-            onChange={(e) => setDayRate(Number(e.target.value))}
-            placeholder="Day Rate (£)"
-            className="border p-2 rounded"
-          />
-
-          <input
-            type="number"
-            value={daysPerWeek}
-            onChange={(e) => setDaysPerWeek(Number(e.target.value))}
-            placeholder="Days per week"
-            className="border p-2 rounded"
-          />
-
-          <input
-            type="number"
-            value={weeksPerYear}
-            onChange={(e) => setWeeksPerYear(Number(e.target.value))}
-            placeholder="Weeks per year"
-            className="border p-2 rounded"
-          />
-
-          <select
-            value={ir35}
-            onChange={(e) => setIr35(e.target.value)}
-            className="border p-2 rounded"
-          >
-            <option value="outside">Outside IR35</option>
-            <option value="inside">Inside IR35</option>
-          </select>
-        </div>
-
-        {/* RESULTS */}
-        <div className="mt-6">
-          <p><strong>Annual Revenue:</strong> £{annualRevenue.toLocaleString()}</p>
-          <p><strong>Umbrella Take-Home:</strong> £{umbrellaTakeHome.toLocaleString()}</p>
-          <p><strong>Limited Take-Home:</strong> £{limitedTakeHome.toLocaleString()}</p>
-
-          <div className="mt-4 p-4 bg-green-100 rounded-xl">
-            <strong>Recommended:</strong> {recommendation}
-          </div>
-        </div>
-      </div>
-
-      {/* EMAIL CAPTURE */}
-      <div className="bg-gray-100 p-6 rounded-2xl mb-8">
-        <h3 className="font-semibold mb-2">
-          Get your results emailed to you
-        </h3>
-        <input
-          type="email"
-          placeholder="Enter your email"
-          className="border p-2 rounded w-full mb-2"
-        />
-        <button className="bg-black text-white px-4 py-2 rounded">
-          Send Results
-        </button>
-      </div>
-
-      {/* CONTENT */}
-      <section className="prose max-w-none">
-        <h2>What’s the Difference?</h2>
-
-        <h3>Limited Company</h3>
-        <ul>
-          <li>You run your own company</li>
-          <li>Paid via salary + dividends</li>
-          <li>More tax efficient (outside IR35)</li>
-        </ul>
-
-        <h3>Umbrella Company</h3>
-        <ul>
-          <li>You are an employee</li>
-          <li>Paid through PAYE</li>
-          <li>Simple, but lower take-home</li>
-        </ul>
-
-        <h2>IR35 Explained</h2>
-        <p>
-          If you're inside IR35, tax benefits of a limited company are reduced.
-          Outside IR35, limited companies are usually more profitable.
-        </p>
-
-        <h2>Which Should You Choose?</h2>
-        <ul>
-          <li>Higher earnings → Limited Company</li>
-          <li>Less hassle → Umbrella</li>
-          <li>New contractor → Umbrella</li>
-        </ul>
-      </section>
-
-      {/* FAQ SCHEMA */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: [
-              {
-                "@type": "Question",
-                name: "Is a limited company better than umbrella?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "It depends on income and IR35 status. Outside IR35, limited companies are often more tax efficient."
-                }
-              },
-              {
-                "@type": "Question",
-                name: "Do umbrella companies pay less?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Yes, typically due to PAYE taxation and employer costs."
-                }
-              }
-            ]
-          })
-        }}
-      />
-    </main>
-  );
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Is a limited company better than umbrella?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Outside IR35, limited companies are usually more tax efficient than umbrella companies."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do umbrella companies pay less?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, umbrella companies typically result in lower take-home pay due to PAYE taxation."
+   }
+  }
+ ]
 }
+</script>
+
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+
+<div class="max-w-4xl mx-auto p-6">
+
+<!-- HERO -->
+<h1 class="text-4xl font-bold mb-3">
+Limited Company vs Umbrella (UK & Scotland)
+</h1>
+
+<p class="text-lg text-gray-600 mb-6">
+See your real take-home pay and find out which option is better for you.
+</p>
+
+<!-- QUICK ANSWER -->
+<div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-8">
+<p><strong>Quick answer:</strong></p>
+<ul class="list-disc ml-6">
+<li>Higher earnings → Limited Company</li>
+<li>Less hassle → Umbrella</li>
+<li>Inside IR35 → Often similar</li>
+</ul>
+</div>
+
+<!-- CALCULATOR -->
+<div class="bg-white shadow-xl rounded-2xl p-6 mb-10">
+
+<h2 class="text-2xl font-semibold mb-4">Calculator</h2>
+
+<div class="grid grid-cols-2 gap-4">
+
+<input id="dayRate" type="number" value="400"
+class="border p-3 rounded-xl"
+placeholder="Day Rate (£)">
+
+<input id="daysPerWeek" type="number" value="5"
+class="border p-3 rounded-xl"
+placeholder="Days per week">
+
+<input id="weeksPerYear" type="number" value="46"
+class="border p-3 rounded-xl"
+placeholder="Weeks per year">
+
+<select id="region" class="border p-3 rounded-xl">
+<option value="uk">England / Wales / NI</option>
+<option value="scotland">Scotland</option>
+</select>
+
+<select id="ir35" class="border p-3 rounded-xl">
+<option value="outside">Outside IR35</option>
+<option value="inside">Inside IR35</option>
+</select>
+
+</div>
+
+<!-- RESULTS -->
+<div class="mt-6 space-y-2 text-lg">
+<p><strong>Annual Revenue:</strong> £<span id="revenue">0</span></p>
+<p><strong>Umbrella Take-Home:</strong> £<span id="umbrella">0</span></p>
+<p><strong>Limited Take-Home:</strong> £<span id="limited">0</span></p>
+<p class="mt-3 text-lg font-semibold">
+💸 Difference: £<span id="difference">0</span>
+</p>
+</div>
+
+<!-- RECOMMENDATION -->
+<div id="resultBox" class="mt-6 p-5 rounded-xl text-lg font-semibold"></div>
+
+<!-- TRUST -->
+<div class="mt-6 text-sm text-gray-600">
+<p><strong>How this is calculated:</strong></p>
+<ul class="list-disc ml-6">
+<li>UK & Scottish income tax bands applied</li>
+<li>National Insurance included</li>
+<li>Corporation tax at 19%</li>
+<li>Dividend tax applied after allowance</li>
+</ul>
+<p class="mt-2">Estimates based on 2024/25 tax rates.</p>
+</div>
+
+</div>
+
+<!-- EMAIL -->
+<div class="bg-gray-100 p-6 rounded-2xl mb-10">
+<h3 class="text-xl font-semibold mb-2">
+Get your results emailed
+</h3>
+<p class="text-gray-600 mb-3">Save your calculation for later.</p>
+<input type="email" placeholder="Enter your email"
+class="border p-3 rounded-xl w-full mb-3">
+<button class="bg-black text-white px-5 py-3 rounded-xl w-full">
+Send Results
+</button>
+</div>
+
+<!-- CONTENT -->
+<div class="prose max-w-none">
+
+<h2>What’s the Difference?</h2>
+
+<h3>Limited Company</h3>
+<ul>
+<li>You run your own business</li>
+<li>Paid via salary + dividends</li>
+<li>More tax efficient outside IR35</li>
+</ul>
+
+<h3>Umbrella Company</h3>
+<ul>
+<li>You are an employee</li>
+<li>Paid through PAYE</li>
+<li>Simple but lower take-home</li>
+</ul>
+
+<h2>IR35 Explained</h2>
+<p>
+IR35 determines how you're taxed. Inside IR35 means PAYE-style tax. Outside IR35 allows more tax efficiency.
+</p>
+
+<h2>Which Should You Choose?</h2>
+<ul>
+<li>New contractor → Umbrella</li>
+<li>Experienced & higher rate → Limited</li>
+<li>Want simplicity → Umbrella</li>
+<li>Want maximum income → Limited</li>
+</ul>
+
+<h2>Real Example</h2>
+<p>
+A contractor earning £400/day will typically take home more through a limited company, especially outside IR35.
+</p>
+
+<h2>FAQs</h2>
+
+<h3>Is a limited company better?</h3>
+<p>Usually yes outside IR35 due to tax efficiency.</p>
+
+<h3>Do umbrella companies pay less?</h3>
+<p>Yes, due to PAYE taxation and additional costs.</p>
+
+</div>
+
+</div>
+
+<script>
+function calculate() {
+  const dayRate = +document.getElementById("dayRate").value;
+  const days = +document.getElementById("daysPerWeek").value;
+  const weeks = +document.getElementById("weeksPerYear").value;
+  const ir35 = document.getElementById("ir35").value;
+  const region = document.getElementById("region").value;
+
+  const revenue = dayRate * days * weeks;
+  const personalAllowance = 12570;
+
+  function incomeTax(income) {
+    let tax = 0;
+
+    if (region === "scotland") {
+      const bands = [
+        [14732, 0.19],
+        [25688, 0.20],
+        [43662, 0.21],
+        [75000, 0.42],
+        [125140, 0.45],
+        [Infinity, 0.48]
+      ];
+
+      let prev = personalAllowance;
+
+      for (let [limit, rate] of bands) {
+        if (income > prev) {
+          const taxable = Math.min(income, limit) - prev;
+          tax += taxable * rate;
+          prev = limit;
+        }
+      }
+
+    } else {
+      const basic = 50270;
+      if (income <= basic) {
+        tax = (income - personalAllowance) * 0.20;
+      } else {
+        tax =
+          (basic - personalAllowance) * 0.20 +
+          (income - basic) * 0.40;
+      }
+    }
+
+    return Math.max(0, tax);
+  }
+
+  function ni(income) {
+    if (income <= 12570) return 0;
+    if (income <= 50270) return (income - 12570) * 0.12;
+    return (50270 - 12570) * 0.12 + (income - 50270) * 0.02;
+  }
+
+  // Umbrella
+  const umbrellaSalary = revenue * 0.9;
+  const umbrellaTakeHome =
+    umbrellaSalary - incomeTax(umbrellaSalary) - ni(umbrellaSalary);
+
+  // Limited
+  let limitedTakeHome = 0;
+
+  if (ir35 === "inside") {
+    limitedTakeHome = umbrellaTakeHome;
+  } else {
+    const salary = 12570;
+    const profit = revenue - salary;
+
+    const corpTax = profit * 0.19;
+    const dividends = profit - corpTax;
+
+    const dividendAllowance = 500;
+    const basicLimit = 50270;
+
+    let dividendTax = 0;
+    const remainingBasic = basicLimit - salary;
+
+    if (dividends <= remainingBasic) {
+      dividendTax = Math.max(0, dividends - dividendAllowance) * 0.0875;
+    } else {
+      dividendTax =
+        Math.max(0, remainingBasic - dividendAllowance) * 0.0875 +
+        (dividends - remainingBasic) * 0.3375;
+    }
+
+    limitedTakeHome = salary + dividends - dividendTax;
+  }
+
+  // Output
+  document.getElementById("revenue").innerText = revenue.toLocaleString();
+  document.getElementById("umbrella").innerText = Math.round(umbrellaTakeHome).toLocaleString();
+  document.getElementById("limited").innerText = Math.round(limitedTakeHome).toLocaleString();
+
+  const diff = Math.round(limitedTakeHome - umbrellaTakeHome);
+  document.getElementById("difference").innerText = Math.abs(diff).toLocaleString();
+
+  const box = document.getElementById("resultBox");
+
+  if (diff > 0) {
+    box.className = "mt-6 p-5 rounded-xl bg-green-100 text-green-800";
+    box.innerHTML = `✅ Limited Company is better by £${diff.toLocaleString()} per year`;
+  } else {
+    box.className = "mt-6 p-5 rounded-xl bg-yellow-100 text-yellow-800";
+    box.innerHTML = `⚠️ Umbrella Company is similar or better for simplicity`;
+  }
+}
+
+document.querySelectorAll("input, select").forEach(el => {
+  el.addEventListener("input", calculate);
+});
+
+calculate();
+</script>
+
+</body>
+</html>
